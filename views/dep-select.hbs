@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+        * {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .blocky {
+            display: block;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        button {
+            display: inline-block;
+            padding: 0.2em 1.45em;
+            margin: 0.1em;
+            border: 0.15em solid #CCCCCC;
+            box-sizing: border-box;
+            text-decoration: none;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            font-weight: 400;
+            color: #000000;
+            background-color: #CCCCCC;
+            text-align: center;
+            position: relative;
+        }
+
+        button:hover {
+            border-color: #7a7a7a;
+        }
+
+        button:active {
+            background-color: #999999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1>Dependency Visualiser 0.0.1</h1>
+            <form id="focus-form" method="GET" action={{ url }}>
+                <label for="focus">
+                    <h2>Focus on:</h2>
+                </label>
+                <select id="focus" name="focus">
+                    <option name="No focus" value="" label="No focus" selected />
+                    {{#each modules}}
+                    <optgroup label={{ this.name }} />
+                    {{#each this.providers}}
+                    <option name={{ this.name }} value={{ this.name }} label={{ this.name }} />
+                    {{/each}}
+                    </optgroup>
+                    {{/each}}
+                </select>
+                <label for="ignoreModules">
+                    <h2>Ignore Modules:</h2>
+                </label>
+
+                {{#each modules}}
+                <div class="blocky">
+                    <input type="checkbox" name="ignoreModules" id='ignore-module-{{this.name}}' value={{this.name}} />
+                    <label for="ignore-module-{{this.name}}">
+                        {{this.name}}
+                    </label>
+                </div>
+                {{/each}}
+
+                <button type="submit">Generate</button>
+            </form>
+        </div>
+        <div class="right-panel">
+            <img src={{ image_src }} />
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        const params = new URL(window.location.href).searchParams;
+
+        for (const [name, value] of params) {
+            console.log(name, value)
+            if (name === 'focus') {
+                document.getElementById('focus').value = value;
+            }
+
+            if (name === 'ignoreModules') {
+                document.getElementById('ignore-module-' + value).checked = true;
+            }
+        }
+    </script>
+</body>
+
+</html>
