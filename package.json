@@ -1,0 +1,41 @@
+{
+  "name": "nest-dependency-viewer",
+  "version": "0.0.2",
+  "description": "View nest dependencies as a diagram",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "yarn tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alsiola/nest-dependency-viewer.git"
+  },
+  "author": "Alex Young",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alsiola/nest-dependency-viewer/issues"
+  },
+  "homepage": "https://github.com/alsiola/nest-dependency-viewer#readme",
+  "devDependencies": {
+    "@nestjs/common": "^7.6.15",
+    "@nestjs/core": "^7.6.15",
+    "@types/express": "^4.17.11",
+    "@types/hbs": "^4.0.1",
+    "@types/lodash": "^4.14.168",
+    "@types/node": "^14.14.37",
+    "rxjs": "^6.6.7",
+    "typescript": "^4.2.3"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "7",
+    "@nestjs/core": "7",
+    "rxjs": "6"
+  },
+  "dependencies": {
+    "@nestjs/platform-express": "^7.6.15",
+    "hbs": "^4.1.1",
+    "lodash": "^4.17.21",
+    "node-plantuml": "^0.9.0"
+  }
+}
