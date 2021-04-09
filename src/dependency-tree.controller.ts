@@ -3,14 +3,21 @@ import {
   Get,
   Header,
   ParseArrayPipe,
+  ParseBoolPipe,
   Query,
   Render,
   Req,
 } from "@nestjs/common";
 import { Request } from "express";
+import { readFileSync } from "fs";
+import { join } from "path";
 import { ParsedUrlQueryInput, stringify } from "querystring";
 import { map, reduce } from "rxjs/operators";
 import { DependencyTreeService } from "./dependency-tree.service";
+
+const version = JSON.parse(
+  readFileSync(join(__dirname, "..", "package.json")).toString()
+).version;
 
 @Controller("/deps")
 export class DependencyTreeController {
@@ -21,10 +28,11 @@ export class DependencyTreeController {
   getFullImage(
     @Query("focus") focus?: string,
     @Query("ignoreModules", new ParseArrayPipe({ optional: true }))
-    ignoreModules?: string[]
+    ignoreModules?: string[],
+    @Query("flattenDB", ParseBoolPipe) flattenDB?: boolean
   ) {
     return this.depTreeService
-      .getDependencyTreeImage({ focus, ignoreModules })
+      .getDependencyTreeImage({ focus, ignoreModules, flattenDB })
 
       .pipe(
         reduce((x, y) => Buffer.concat([x, y])),
@@ -43,6 +51,7 @@ export class DependencyTreeController {
         url + `/full.svg?` + stringify(request.query as ParsedUrlQueryInput),
       url,
       modules,
+      version,
     };
   }
 }

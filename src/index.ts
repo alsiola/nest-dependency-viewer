@@ -13,8 +13,6 @@ export class DependencyTreeViewer {
     app.setBaseViewsDir(join(__dirname, "..", "views"));
     app.setViewEngine("hbs");
 
-    await app.listen(port);
-
     return app;
   }
 }

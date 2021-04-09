@@ -39,13 +39,18 @@
         button:active {
             background-color: #999999;
         }
+
+        .mg-10 {
+            margin: 10px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="left-panel">
-            <h1>Dependency Visualiser 0.0.1</h1>
+            <h1>Dependency Visualiser {{version}}</h1>
+            <h2><a href="https://github.com/alsiola/nest-dependency-viewer">Github</a></h2>
             <form id="focus-form" method="GET" action={{ url }}>
                 <label for="focus">
                     <h2>Focus on:</h2>
@@ -60,6 +65,13 @@
                     </optgroup>
                     {{/each}}
                 </select>
+
+                <h2>Flatten DB module</h2>
+                <input type="radio" name="flattenDB" id="flattenDB-yes" value="true" />
+                <label for="flattenDB-yes">Yes</label>
+                <input type="radio" name="flattenDB" id="flattenDB-no" value="false" />
+                <label for="flattenDB-no">No</label>
+
                 <label for="ignoreModules">
                     <h2>Ignore Modules:</h2>
                 </label>
@@ -73,7 +85,9 @@
                 </div>
                 {{/each}}
 
-                <button type="submit">Generate</button>
+                <div class="mg-10">
+                    <button type="submit">Generate</button>
+                </div>
             </form>
         </div>
         <div class="right-panel">
@@ -93,6 +107,14 @@
 
             if (name === 'ignoreModules') {
                 document.getElementById('ignore-module-' + value).checked = true;
+            }
+
+            if (name === 'flattenDB') {
+                if (value === 'true') {
+                    document.getElementById('flattenDB-yes').checked = true;
+                } else {
+                    document.getElementById('flattenDB-no').checked = true;
+                }
             }
         }
     </script>

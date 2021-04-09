@@ -137,23 +137,28 @@ export class DependencyTreeService {
       )
     );
 
-    return includedModules.map((m) => ({
-      ...m,
-      providers: m.providers.filter(
-        (p) => allDeps.has(p.name) || focus === p.name
-      ),
-    }));
+    return includedModules
+      .map((m) => ({
+        ...m,
+        providers: sortBy(
+          m.providers.filter((p) => allDeps.has(p.name) || focus === p.name),
+          (p) => p.name
+        ),
+      }))
+      .filter(({ providers }) => providers.length > 0);
   }
 
   public getDependencyTreeImage({
     focus,
     ignoreModules = [],
     ignoreProviders = [],
+    flattenDB = false,
   }: DepTreeOpts): Observable<Buffer> {
     const modules = this.getDependencyTree({
       focus,
       ignoreModules,
       ignoreProviders,
+      flattenDB,
     });
 
     const uml = this.modulesToUML(modules);
