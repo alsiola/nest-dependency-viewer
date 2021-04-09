@@ -1,6 +1,6 @@
 {
   "name": "nest-dependency-viewer",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "View nest dependencies as a diagram",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -36,8 +36,8 @@
     "rxjs": "6"
   },
   "dependencies": {
-    "hbs": "^4.1.1",
-    "lodash": "^4.17.21",
-    "node-plantuml": "^0.9.0"
+    "hbs": "^4.1",
+    "lodash": "^4.17",
+    "node-plantuml": "^0.9"
   }
 }
