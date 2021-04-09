@@ -1,6 +1,6 @@
 {
   "name": "nest-dependency-viewer",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "View nest dependencies as a diagram",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
