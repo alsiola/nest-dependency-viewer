@@ -2,6 +2,8 @@
 
 Provides a web UI for examining the dependency tree of a NestJS application. Intended to run in development environments, on a separate port from the main application.
 
+Available from [NPM](https://www.npmjs.com/package/nest-dependency-viewer)
+
 ## Dependencies
 
 This package requires [Java](https://java.com/en/download/) to be running, and [graphviz](http://www.graphviz.org/) to be installed.
